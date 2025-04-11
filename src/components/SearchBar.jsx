@@ -1,28 +1,26 @@
 import { useState } from 'react';
-import { Search } from 'lucide-react';
 
-const SearchBar = ({ onSearch }) => {
+function SearchBar({ onSearch }) {
   const [query, setQuery] = useState('');
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(query);
+    if (query.trim()) {
+      onSearch(query.trim());
+    }
   };
-  
+
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
       <input
         type="text"
+        placeholder="Search for a meal (e.g., pasta, chicken)"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for recipes (e.g., 'pasta', 'chicken')"
-        aria-label="Search for recipes"
       />
-      <button type="submit" aria-label="Search">
-        <Search size={20} />
-      </button>
+      <button type="submit">Search</button>
     </form>
   );
-};
+}
 
 export default SearchBar;
